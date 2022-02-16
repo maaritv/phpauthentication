@@ -1,0 +1,17 @@
+{
+    "name": "phpauthentication",
+    "description": "Authentication demo",
+    "type": "project",
+    "license": "MIT",
+    "usernames": [
+        {
+            "name": "Maarit",
+            "email": "apptestingmv@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "ezyang/htmlpurifier": "^4.13"
+    }
+}
