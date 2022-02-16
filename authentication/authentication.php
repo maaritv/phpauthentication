@@ -10,6 +10,14 @@ function setBrowserUnauthenticated()
     session_start();
 }
 
+
+function isSessionAuthenticated(){
+    if (isset($_SESSION['loggedin'])){
+        return true;
+    }
+    return false;
+}
+
 function authenticate($username, $password)
 {
     $userDAO = new UserDAO();
@@ -18,7 +26,7 @@ function authenticate($username, $password)
         $auth_result = password_verify($password, $user->password);
         if ($auth_result == true) {
             $_SESSION['loggedin'] = true;
-            $_SESSION['loggedin'] = time();
+            $_SESSION['loggedtime'] = time();
             $_SESSION['username'] = $username;
             return $user;
         }
@@ -44,7 +52,7 @@ function checkPasswordStrength($password)
 function setCookieParams()
 {
     session_set_cookie_params([
-        'lifetime' => 100,
+        'lifetime' => 600,
         'secure' => true,
         'httponly' => true,
         'samesite' => 'strict'
@@ -83,21 +91,31 @@ function decrypt($encrypted, $key)
     }
 }
 
-function redirect_to_old($path)
+/**
+ * Käytä tätä versioita, kun käytät sovellusta PHP-sandboksissa.
+ */
+
+function redirect_to_sandbox($path)
 {
-    $redirect_to_str = "https://" . gethostname() . "/" . $path;
-    $meta = "<meta http-equiv=\"refresh\" content=\"0\"; url=\"" . $redirect_to_str . "\">";
+    $redirect_to_str = "https://".$_SERVER['HTTP_HOST']."/".$path;
+    $meta="<meta http-equiv=\"refresh\" content=\"0;url=".$redirect_to_str."\" />";
 ?>
     <html>
-
-    <head>
-        <?php echo $meta ?>
-    </head>
-
-    </html>
+<head>
+<?php echo $meta ?>
+<title>Moving</title>
+</head>
+<body>
+Moving...
+</body>
+</html>
 <?php
-    exit();
+    die();
 }
+
+/*
+ Käytä tätä versioita, kun käytät sovellusta paikallisella XAMP-koneella.
+*/
 
 function redirect_to($path)
 {

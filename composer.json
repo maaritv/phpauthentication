@@ -1,12 +1,12 @@
 {
-    "name": "phpauthentication",
-    "description": "Authentication demo",
+    "name": "phpsandbox/standard",
+    "description": "Official scaffold for Standard noteusers on PHPSandbox",
     "type": "project",
     "license": "MIT",
     "usernames": [
         {
-            "name": "Maarit",
-            "email": "apptestingmv@gmail.com"
+            "name": "Olatunbosun Egberinde",
+            "email": "bosunski@gmail.com"
         }
     ],
     "minimum-stability": "dev",

@@ -20,7 +20,8 @@ require_once('authentication/secret_constants.php');
 
 my_error_logging_principles();
 
-if (!isset($_SESSION['loggedin'])) {
+if (isSessionAuthenticated()!=1) {
+  //print_r($_SESSION);
   redirect_to("index.php");
 }
 
